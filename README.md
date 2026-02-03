@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Movie Directory App
 
-## Getting Started
+A high-performance Movie Directory application built with **Next.js 15**, **Tailwind CSS**, and **Docker**. This project allows users to browse, search, filter, and sort a curated list of top-rated movies with a polished, interactive UI.
 
-First, run the development server:
+## 🚀 Live Demo
+**[Click Here to Visit Live App](https://movie-app-chi-dun.vercel.app/)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
+- **🔍 Advanced Search:** Real-time search by movie title.
+- **📂 Categorization:** Filter movies by Genre (Action, Sci-Fi, Drama, etc.).
+- **⚡ Sorting:** Sort by **Rating (High to Low)**, **Year (Newest)**, or **Title (A-Z)**.
+- **🎨 Interactive UI:** Smooth hover effects and animations using `framer-motion`.
+- **📱 Fully Responsive:** Optimized for Mobile, Tablet, and Desktop.
+- **🐳 Dockerized:** Fully containerized for consistent deployment environments.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
+- **Frontend:** Next.js 15 (App Router), React, TypeScript
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **Deployment:** Vercel
+- **Containerization:** Docker
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤖 AI & Automation Usage
+As part of the assignment requirements, AI tools were leveraged to accelerate development:
+1.  **Dataset Generation:**
+    - Used LLMs to generate a Python script (`generate_data.py`) that created a realistic `data.json` dataset with 20+ movies, including ratings, release years, and descriptions.
+2.  **Code Optimization:**
+    - Used AI to refactor the sorting algorithm and filter logic for better performance.
+    - Generated the initial Dockerfile configuration to ensure best practices for Next.js containerization.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🐳 How to Run Locally (via Docker)
+To run the app in a containerized environment:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Build the Image:**
+   ```bash
+   docker build -t movie-app .
