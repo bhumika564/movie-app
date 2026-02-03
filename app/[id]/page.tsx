@@ -1,83 +1,115 @@
+import { Metadata } from "next";
 import Link from "next/link";
-import moviesData from "../data.json"; 
+import moviesData from "../data.json";
 import { Movie } from "../type";
+import { use } from "react";
 
-export async function generateStaticParams() {
-  const movies = moviesData as Movie[];
-  return movies.map((movie) => ({
-    id: movie.id.toString(),
-  }));
+interface Props {
+  params: Promise<{ id: string }>;
 }
 
-export default async function MovieDetail({ params }: { params: Promise<{ id: string }> }) {
+const allMovies = moviesData as unknown as Movie[];
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const movies = moviesData as Movie[];
-  const movie = movies.find((m) => m.id.toString() === id);
+  const movie = allMovies.find((m) => String(m.id) === id);
+  return {
+    title: movie ? `${movie.title} | Movie Directory` : "Movie Not Found",
+  };
+}
+
+export default function MovieDetail({ params }: Props) {
+  const { id } = use(params);
+  const movie = allMovies.find((m) => String(m.id) === id);
 
   if (!movie) {
-    return <div className="text-white text-center mt-20 font-bold text-2xl selection:bg-[#D14D35]">Movie Not Found</div>;
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-10 font-sans">
+        <h1 className="text-4xl font-black mb-4">404 - MOVIE NOT FOUND</h1>
+        <Link href="/" className="text-[#D14D35] underline font-bold px-8 py-3 border border-[#D14D35] rounded-2xl hover:bg-[#D14D35] hover:text-white transition-all">
+          Return to Directory
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white flex justify-center py-12 md:py-20 px-4 selection:bg-[#D14D35]">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-[#D14D35]">
+      <div className="max-w-7xl mx-auto p-6 md:p-12">
+        <Link 
+          href="/" 
+          className="inline-block mb-10 text-gray-500 hover:text-[#D14D35] transition-colors font-bold tracking-widest uppercase text-xs"
+        >
+          ← Back to Collection
+        </Link>
 
-        {/* LEFT SIDE: POSTER AREA (Fixed Image Logic) */}
-        <div className="relative h-[550px] md:h-[700px] w-full bg-[#1a1a1a] rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden group">
-          <img 
-            src={movie.image_url} 
-            alt={movie.title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          {/* Bottom Gradient for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
-          
-          {/* Floating Rating Badge */}
-          <div className="absolute bottom-10 left-10 bg-white text-black px-6 py-3 rounded-[1.5rem] font-black text-2xl shadow-2xl">
-            ★ {movie.rating}
-          </div>
-        </div>
-
-        {/* RIGHT SIDE: INFORMATION */}
-        <div className="flex flex-col space-y-8">
-          <Link href="/" className="text-gray-500 hover:text-[#D14D35] font-bold uppercase tracking-[0.3em] text-xs transition-colors">
-            ← Back to Gallery
-          </Link>
-
-          <div>
-            <h1 className="text-6xl md:text-7xl font-black leading-none mb-6 tracking-tighter uppercase">
-              {movie.title}
-            </h1>
-            
-            <div className="flex flex-wrap gap-3">
-              {movie.genre.split(',').map((g) => (
-                <span key={g} className="bg-[#D14D35]/10 text-[#D14D35] border border-[#D14D35]/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
-                  {g.trim()}
-                </span>
-              ))}
-              <span className="text-gray-500 font-bold px-4 py-1.5 tracking-widest text-xs uppercase self-center">
-                Released: {movie.release_year}
-              </span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Poster Section */}
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/5 shadow-[#D14D35]/10 group">
+              <img 
+                src={movie.image_url} 
+                alt={movie.title} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute top-8 right-8 bg-white text-black w-16 h-16 rounded-2xl flex flex-col items-center justify-center shadow-2xl">
+                <span className="text-xl font-black">{movie.rating}</span>
+                <span className="text-[0.6rem] font-bold text-gray-400 uppercase">IMDB</span>
+              </div>
             </div>
           </div>
 
-          <div className="bg-[#141414] p-8 rounded-[2.5rem] border border-white/5">
-            <h3 className="text-[#D14D35] text-xs font-bold uppercase tracking-[0.3em] mb-4">Plot Summary</h3>
-            <p className="text-gray-400 leading-relaxed text-lg font-medium">
-              {movie.description}
-            </p>
-          </div>
+          {/* Details Section */}
+          <div className="lg:col-span-7 pt-6">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-6 uppercase">
+              {movie.title}
+            </h1>
+            
+            <div className="flex flex-wrap gap-4 mb-8">
+              <span className="px-6 py-2 rounded-full bg-[#D14D35] text-white font-bold text-xs uppercase tracking-widest">
+                {movie.genre}
+              </span>
+              <span className="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 font-bold text-xs uppercase tracking-widest">
+                {movie.release_year}
+              </span>
+            </div>
 
-          <div className="flex gap-4 pt-4">
-            <button className="flex-1 bg-white text-black font-black py-5 rounded-[1.5rem] hover:bg-[#D14D35] hover:text-white transition-all duration-300 uppercase tracking-widest text-sm">
-              Watch Trailer
-            </button>
-            <button className="flex-1 border border-white/10 text-white font-black py-5 rounded-[1.5rem] hover:bg-white/5 transition-all uppercase tracking-widest text-sm">
-              Watchlist +
-            </button>
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-gray-500 font-black uppercase tracking-[0.3em] text-[0.65rem] mb-4">The Plot</h3>
+                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-medium">
+                  {movie.description}
+                </p>
+              </div>
+
+              {/* Action Buttons - AB YAHAN HAI BUTTONS */}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <button className="flex-1 min-w-[180px] bg-[#D14D35] hover:bg-[#b03d28] text-white font-black py-5 rounded-[2rem] transition-all transform hover:scale-[1.02] active:scale-[0.98] uppercase tracking-tighter text-lg shadow-xl shadow-[#D14D35]/20">
+                  Watch Now
+                </button>
+                <button className="flex-1 min-w-[180px] bg-white/5 hover:bg-white/10 border border-white/10 text-white font-black py-5 rounded-[2rem] transition-all transform hover:scale-[1.02] active:scale-[0.98] uppercase tracking-tighter text-lg backdrop-blur-md">
+                  + Add to Watchlist
+                </button>
+              </div>
+
+              <div className="pt-10 border-t border-white/5 flex gap-12">
+                <div>
+                  <p className="text-gray-500 font-black uppercase tracking-[0.2em] text-[0.6rem] mb-1">Quality</p>
+                  <p className="text-lg font-bold">4K Ultra HD</p>
+                </div>
+                <div>
+                  <p className="text-gray-500 font-black uppercase tracking-[0.2em] text-[0.6rem] mb-1">Language</p>
+                  <p className="text-lg font-bold">English (EN)</p>
+                </div>
+                <div>
+                  <p className="text-gray-500 font-black uppercase tracking-[0.2em] text-[0.6rem] mb-1">Audio</p>
+                  <p className="text-lg font-bold">Dolby 7.1</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,34 +1,46 @@
+import pandas as pd
 import json
-import random
+import ast
+import os
 
-# 5 Popular Genres
-genres = ["Action", "Sci-Fi", "Drama", "Comedy", "Thriller"]
+csv_path = r'C:\Users\asus\OneDrive\Desktop\tmdb_5000_movies.csv'
 
-# Empty list jisme movies store hongi
-movies = []
-
-print("Generating data...")
-
-for i in range(1, 21):  # 20 movies generate kar rahe hain
-    movie = {
-        "id": i,
-        "title": f"Super Movie {i}",
-        "genre": random.choice(genres),
-        "rating": round(random.uniform(5.0, 9.9), 1),
-        "release_year": random.randint(2015, 2024),
-        "description": f"This is a thrilling description for Super Movie {i}. Watch it now!",
-        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
-    }
-    movies.append(movie)
-
-# Data ko src folder ke andar data.json naam se save karein
-# Note: Agar 'src' folder nahi hai, to path sirf "data.json" rakhein
 try:
-    with open("src/data.json", "w") as f:
-        json.dump(movies, f, indent=4)
-    print("Success! 'src/data.json' file ban gayi hai.")
-except FileNotFoundError:
-    # Agar src folder nahi mila (kabhi kabhi root me hota hai)
-    with open("data.json", "w") as f:
-        json.dump(movies, f, indent=4)
-    print("Success! 'data.json' file root folder me ban gayi hai.")
+    df = pd.read_csv(csv_path)
+    # Filter Top 250 Movies
+    top_movies = df[df['vote_count'] > 1000].sort_values(by='vote_average', ascending=False).head(250)
+
+    movie_list = []
+    for i, (idx, row) in enumerate(top_movies.iterrows()):
+        try:
+            genres = ast.literal_eval(row['genres'])
+            genre_name = genres[0]['name'] if genres else "Drama"
+        except:
+            genre_name = "Drama"
+
+        movie_id = int(row['id'])
+        year = int(row['release_date'].split('-')[0]) if pd.notnull(row['release_date']) else 2024
+        
+        # Har movie ID ke liye ek unique fixed image (No repeats!)
+        image_url = f"https://picsum.photos/seed/{movie_id}/500/750"
+
+        movie_list.append({
+            "id": movie_id,
+            "title": row['title'],
+            "genre": genre_name,
+            "rating": round(float(row['vote_average']), 1),
+            "release_year": year,
+            "description": row['overview'] if pd.notnull(row['overview']) else "No summary available.",
+            "image_url": image_url
+        })
+
+    if not os.path.exists('app'):
+        os.makedirs('app')
+
+    with open('app/data.json', 'w') as f:
+        json.dump(movie_list, f, indent=4)
+
+    print("DONE! 250 UNIQUE movies generated in app/data.json")
+
+except Exception as e:
+    print(f"Error occurred: {e}")
