@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-const moviesData = require('../data.json'); 
+import moviesData from './data.json';
 import { Movie } from './type'; // Yahan 'types' ki jagah 'type' kar diya
 
 const baseUrl = 'https://movie-app-chi-dun.vercel.app';

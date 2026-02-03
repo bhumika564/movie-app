@@ -4,19 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import moviesData from "./data.json";
+import { Movie } from "./type"; // 👈 IMPORT ADD KAREIN (types.ts se)
 
-interface Movie {
-  id: number;
-  title: string;
-  genre: string;
-  rating: number;
-  release_year: number;
-  description: string;
-  image_url: string;
-}
+// 1. Data ko "Movie" list ki tarah treat karein (Casting)
+const allMovies = moviesData as unknown as Movie[];
 
-const allMovies: Movie[] = moviesData as Movie[];
-const genres = ["All", ...new Set(allMovies.map((m) => m.genre))];
+// 2. Genres nikalne ka SAFE tareeka (Array.from use kiya)
+const genres = ["All", ...Array.from(new Set(allMovies.map((m) => m.genre)))];
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,40 +92,71 @@ export default function Home() {
           </div>
 
           {/* MOVIE GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMovies.map((movie, index) => (
-              <Link href={`/${movie.id}`} key={movie.id} className="group block">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:border-yellow-500/50 h-full flex flex-col"
-                >
-                  <div className="h-52 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 flex items-center justify-center relative group-hover:from-gray-800 group-hover:to-gray-600 transition-colors">
-                     <span className="text-6xl drop-shadow-2xl filter grayscale group-hover:grayscale-0 transition-all duration-300">🍿</span>
-                  </div>
-
-                  <div className="p-5 flex-grow">
-                    <div className="flex justify-between items-start mb-3">
-                      <h2 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-1">{movie.title}</h2>
-                      <span className="bg-yellow-500 text-black text-xs px-2 py-1 rounded font-bold">
-                        ★ {movie.rating}
-                      </span>
-                    </div>
-                    
-                    <div className="flex gap-2 mb-3 text-xs font-medium text-gray-400">
-                       <span className="border border-gray-700 px-2 py-1 rounded">{movie.genre}</span>
-                       <span className="border border-gray-700 px-2 py-1 rounded">{movie.release_year}</span>
-                    </div>
-
-                    <p className="text-gray-400 text-sm line-clamp-2 group-hover:text-gray-300">
-                      {movie.description}
-                    </p>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
+{/* DRIBBBLE INSPIRED 'BENTO' GRID */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+  {filteredMovies.map((movie, index) => (
+    <Link href={`/${movie.id}`} key={movie.id} className="block group">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: index * 0.1 }}
+        className="bg-[#1a1a1a] rounded-[2.5rem] p-2 hover:scale-[1.02] transition-transform duration-500 shadow-2xl"
+      >
+        {/* Top Section: Image & Badges */}
+        <div className="relative h-64 w-full rounded-[2rem] overflow-hidden mb-2">
+          {/* Gradient Placeholder for Image */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900 group-hover:scale-105 transition-transform duration-700">
+             {/* Real App mein yahan <Image /> hota */}
+             <div className="flex items-center justify-center h-full text-8xl opacity-20">🎬</div>
           </div>
+          
+          {/* IMDB Rating Badge (Top Right - White Style) */}
+          <div className="absolute top-4 right-4 flex flex-col items-center justify-center bg-[#e5e5e5] text-black w-16 h-16 rounded-2xl shadow-lg z-10">
+            <span className="text-xl font-bold leading-none">{movie.rating}</span>
+            <span className="text-[0.6rem] font-bold uppercase tracking-wider text-gray-500 mt-1">Rating</span>
+          </div>
+
+          {/* Age Rating Badge (Below IMDB - Grey Style) */}
+          <div className="absolute top-24 right-4 flex items-center justify-center bg-[#2a2a2a]/80 backdrop-blur-sm text-gray-300 w-12 h-12 rounded-xl border border-white/10 z-10">
+            <span className="text-sm font-bold">R</span>
+          </div>
+
+          {/* Play Button Overlay */}
+          <div className="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md p-3 rounded-full border border-white/20">
+            <span className="text-white text-xl">▶</span>
+          </div>
+        </div>
+
+        {/* Bottom Section: The Orange Card */}
+        <div className="bg-[#D14D35] rounded-[2rem] p-6 text-white relative overflow-hidden group-hover:bg-[#e0553d] transition-colors">
+          {/* Title */}
+          <p className="text-xs font-medium text-white/80 uppercase tracking-widest mb-2">About Film</p>
+          <h2 className="text-3xl font-bold leading-tight mb-3 font-sans">
+            {movie.title}
+          </h2>
+          
+          {/* Description */}
+          <p className="text-white/90 text-sm line-clamp-3 mb-6 font-light leading-relaxed">
+            {movie.description}
+          </p>
+
+          {/* Footer: Read More & Share */}
+          <div className="flex justify-between items-center mt-auto">
+            <button className="border border-white/40 px-6 py-2 rounded-full text-sm hover:bg-white hover:text-[#D14D35] transition-all font-medium">
+              Read more
+            </button>
+            <div className="flex -space-x-2">
+              {/* Dummy Cast Circles */}
+              <div className="w-8 h-8 rounded-full bg-white/20 border border-white/10"></div>
+              <div className="w-8 h-8 rounded-full bg-white/30 border border-white/10"></div>
+              <div className="w-8 h-8 rounded-full bg-white/40 border border-white/10 flex items-center justify-center text-[0.6rem]">+3</div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  ))}
+</div>
 
           {filteredMovies.length === 0 && (
             <div className="text-center text-gray-500 mt-20 text-xl">No movies found matching your criteria.</div>
