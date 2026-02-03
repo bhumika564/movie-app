@@ -32,10 +32,6 @@ To run the app in a containerized environment:
    ```bash
    docker build -t movie-app .
 
-### **Step 2: Ab Enter dabayein aur Ise Paste karein (Part 2 - AI & Future wala hissa)**
-*(Ise theek Step 1 wale code ke neeche paste karna hai)*
-
-```markdown
 ## 🤖 AI & Automation Usage
 As part of the assignment requirements, AI tools were leveraged to accelerate development:
 1.  **Dataset Generation:**
