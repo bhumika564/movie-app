@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "title": "Super Movie 1",
+        "genre": "Sci-Fi",
+        "rating": 7.3,
+        "release_year": 2023,
+        "description": "This is a thrilling description for Super Movie 1. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 2,
+        "title": "Super Movie 2",
+        "genre": "Drama",
+        "rating": 9.4,
+        "release_year": 2020,
+        "description": "This is a thrilling description for Super Movie 2. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 3,
+        "title": "Super Movie 3",
+        "genre": "Action",
+        "rating": 8.4,
+        "release_year": 2020,
+        "description": "This is a thrilling description for Super Movie 3. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 4,
+        "title": "Super Movie 4",
+        "genre": "Sci-Fi",
+        "rating": 8.7,
+        "release_year": 2021,
+        "description": "This is a thrilling description for Super Movie 4. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 5,
+        "title": "Super Movie 5",
+        "genre": "Thriller",
+        "rating": 8.2,
+        "release_year": 2024,
+        "description": "This is a thrilling description for Super Movie 5. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 6,
+        "title": "Super Movie 6",
+        "genre": "Thriller",
+        "rating": 8.0,
+        "release_year": 2015,
+        "description": "This is a thrilling description for Super Movie 6. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 7,
+        "title": "Super Movie 7",
+        "genre": "Drama",
+        "rating": 5.6,
+        "release_year": 2023,
+        "description": "This is a thrilling description for Super Movie 7. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 8,
+        "title": "Super Movie 8",
+        "genre": "Sci-Fi",
+        "rating": 9.1,
+        "release_year": 2022,
+        "description": "This is a thrilling description for Super Movie 8. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 9,
+        "title": "Super Movie 9",
+        "genre": "Sci-Fi",
+        "rating": 9.6,
+        "release_year": 2023,
+        "description": "This is a thrilling description for Super Movie 9. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 10,
+        "title": "Super Movie 10",
+        "genre": "Drama",
+        "rating": 9.2,
+        "release_year": 2020,
+        "description": "This is a thrilling description for Super Movie 10. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 11,
+        "title": "Super Movie 11",
+        "genre": "Thriller",
+        "rating": 8.7,
+        "release_year": 2017,
+        "description": "This is a thrilling description for Super Movie 11. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 12,
+        "title": "Super Movie 12",
+        "genre": "Sci-Fi",
+        "rating": 5.9,
+        "release_year": 2018,
+        "description": "This is a thrilling description for Super Movie 12. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 13,
+        "title": "Super Movie 13",
+        "genre": "Thriller",
+        "rating": 6.5,
+        "release_year": 2020,
+        "description": "This is a thrilling description for Super Movie 13. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 14,
+        "title": "Super Movie 14",
+        "genre": "Drama",
+        "rating": 7.8,
+        "release_year": 2019,
+        "description": "This is a thrilling description for Super Movie 14. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 15,
+        "title": "Super Movie 15",
+        "genre": "Thriller",
+        "rating": 5.7,
+        "release_year": 2020,
+        "description": "This is a thrilling description for Super Movie 15. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 16,
+        "title": "Super Movie 16",
+        "genre": "Drama",
+        "rating": 8.7,
+        "release_year": 2018,
+        "description": "This is a thrilling description for Super Movie 16. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 17,
+        "title": "Super Movie 17",
+        "genre": "Comedy",
+        "rating": 5.0,
+        "release_year": 2018,
+        "description": "This is a thrilling description for Super Movie 17. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 18,
+        "title": "Super Movie 18",
+        "genre": "Thriller",
+        "rating": 8.7,
+        "release_year": 2018,
+        "description": "This is a thrilling description for Super Movie 18. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 19,
+        "title": "Super Movie 19",
+        "genre": "Thriller",
+        "rating": 5.2,
+        "release_year": 2023,
+        "description": "This is a thrilling description for Super Movie 19. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    },
+    {
+        "id": 20,
+        "title": "Super Movie 20",
+        "genre": "Action",
+        "rating": 6.0,
+        "release_year": 2022,
+        "description": "This is a thrilling description for Super Movie 20. Watch it now!",
+        "image_url": "https://placehold.co/600x400/png?text=Movie+Poster"
+    }
+]
