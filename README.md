@@ -34,3 +34,14 @@ To run the app in a containerized environment:
 1. **Build the Image:**
    ```bash
    docker build -t movie-app .
+
+   ## 🧠 AI Prompts Used
+Here are the specific prompts I used to accelerate development:
+1.  **Data Generation:** "Create a JSON dataset of 20 realistic movies with fields: id, title, genre (Action, Sci-Fi, Drama), rating (1-10), release_year, description, and image_url. Ensure a mix of ratings."
+2.  **Logic Refactoring:** "Refactor this filtering logic in Next.js to handle both search query and genre selection simultaneously, and add a sort function for rating."
+3.  **Styling:** "Convert this CSS grid layout to Tailwind CSS classes with responsive breakpoints for mobile, tablet, and desktop."
+
+## 🔮 What I'd Improve with 2 More Days
+1.  **Pagination/Infinite Scroll:** Currently, all movies load at once. I would add infinite scroll for better performance with larger datasets.
+2.  **User Favorites:** Add local storage functionality so users can "heart" movies and see them in a "My List" page.
+3.  **Better Image Optimization:** Implement `next/image` with proper placeholders (blur effect) for smoother loading.
