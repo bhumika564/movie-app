@@ -25,13 +25,6 @@ A high-performance Movie Directory application built with **Next.js 15**, **Tail
 - **Deployment:** Vercel
 - **Containerization:** Docker
 
-## 🐳 How to Run Locally (via Docker)
-To run the app in a containerized environment:
-
-1. **Build the Image:**
-   ```bash
-   docker build -t movie-app .
-
 ## 🤖 AI & Automation Usage
 As part of the assignment requirements, AI tools were leveraged to accelerate development:
 1.  **Dataset Generation:**
@@ -50,3 +43,11 @@ Here are the specific prompts I used to accelerate development:
 1.  **Pagination/Infinite Scroll:** Currently, all movies load at once. I would add infinite scroll for better performance with larger datasets.
 2.  **User Favorites:** Add local storage functionality so users can "heart" movies and see them in a "My List" page.
 3.  **Better Image Optimization:** Implement `next/image` with proper placeholders (blur effect) for smoother loading.
+
+## 🐳 How to Run Locally (via Docker)
+To run the app in a containerized environment:
+
+1. **Build the Image:**
+   ```bash
+   docker build -t movie-app .
+
